@@ -1,0 +1,26 @@
+type Vote {
+  id: ID! @unique
+  product: Product!
+  user: User!
+}
+
+type Product {
+  id: ID! @unique
+  createdAt: DateTime!
+  title: String!
+  price: Float!
+  units: Int!
+  description: String!
+  url: String!
+  postedBy: User
+  votes: [Vote!]!
+}
+
+type User {
+  id: ID! @unique
+  name: String!
+  email: String! @unique
+  password: String!
+  products: [Product!]!
+  votes: [Vote!]!
+}
