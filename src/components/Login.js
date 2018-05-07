@@ -39,7 +39,7 @@ class Login extends Component {
         </div>
         <div className="flex mt3">
           <div className="pointer mr2 button" onClick={() => this._confirm()}>
-            {this.state.login ? 'login' : 'create account'}
+            {this.state.login ? 'login' : 'sign up'}
           </div>
           <div
             className="pointer button"

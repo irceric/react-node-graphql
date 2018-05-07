@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { withApollo } from 'react-apollo';
 import gql from 'graphql-tag';
-import Link from './Link';
+import Product from './Product';
 
 class Search extends Component {
 	state = {
-		links: [],
+		products: [],
 		filter: '',
 	};
 
@@ -20,8 +20,8 @@ class Search extends Component {
 					/>
 					<button onClick={() => this._executeSearch()}>OK</button>
 				</div>
-				{this.state.links.map((link, index) => (
-					<Link key={link.id} link={link} index={index} />
+				{this.state.products.map((product, index) => (
+					<Product key={product.id} product={product} index={index} />
 				))}
 			</div>
 		);
@@ -33,16 +33,19 @@ class Search extends Component {
 			query: FEED_SEARCH_QUERY,
 			variables: { filter },
 		});
-		const links = result.data.feed.links;
-		this.setState({ links });
+		const products = result.data.feed.products;
+		this.setState({ products });
 	};
 }
 
 const FEED_SEARCH_QUERY = gql`
 	query FeedSearchQuery($filter: String!) {
 		feed(filter: $filter) {
-			links {
+			products {
 				id
+				title
+				price
+				units
 				url
 				description
 				createdAt
